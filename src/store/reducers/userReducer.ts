@@ -13,7 +13,7 @@ const userReducer = (state: UserState = defaultState, action: UserAction) => {
         case "LOGIN_SUCCESS":
             return ({ ...state, loading: false, data: action.payload }) as UserState
         case "LOGIN_ERROR":
-            return ({ ...state, loading: false, error: "" }) as UserState
+            return ({ ...state, loading: false, error: action.error }) as UserState
 
         default:
             return state;

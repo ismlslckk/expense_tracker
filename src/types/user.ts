@@ -30,6 +30,7 @@ interface LOGIN_SUCCESS {
 
 interface LOGIN_ERROR {
     type: "LOGIN_ERROR";
+    error: string;
 }
 
 export type UserAction = LOGIN_START | LOGIN_SUCCESS | LOGIN_ERROR;

@@ -7,10 +7,10 @@ export const login = (creds: LoginForm) => async (dispatch: UserDispatch) => {
 
     try {
         const response = await api().post<User>("/auth/login", creds);
-        response.data.username =creds.username;
+        response.data.username = creds.username;
         dispatch({ type: "LOGIN_SUCCESS", payload: response.data });
-    } catch {
-        dispatch({ type: "LOGIN_ERROR" });
+    } catch (error: any) {
+        dispatch({ type: "LOGIN_ERROR", error: error.message });
     }
 
 };

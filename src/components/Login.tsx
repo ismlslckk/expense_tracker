@@ -1,6 +1,6 @@
 import { Button, Checkbox, Col, Form, Input, Row, Result } from 'antd';
 import React, { useEffect } from "react";
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { LoginForm } from '../types';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../store/actions/userActions';
@@ -9,7 +9,6 @@ import { messageProvider } from '../utils';
 
 function Login() {
 
-    let navigate = useNavigate();
     let location = useLocation();
     const dispatch = useDispatch();
 
@@ -22,14 +21,14 @@ function Login() {
         dispatch(login(values));
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         error && messageProvider().error(error);
-    },[error])
+    }, [error])
 
-    useEffect(()=>{
+    useEffect(() => {
         data.username && messageProvider().success("You've successfully logged in!");
-    },[data.username])
-   
+    }, [data.username])
+
     return (
         <React.Fragment>
             <h2 style={{ textAlign: 'center' }}>Please Login</h2>
