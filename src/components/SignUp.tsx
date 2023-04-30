@@ -1,6 +1,15 @@
-import { Button, Form, Input, InputNumber } from 'antd';
+import { Button, Form, Input, message } from 'antd';
+
+import { useNavigate } from 'react-router-dom';
+import { api } from '../utils';
+import messageProvider from '../utils/message';
 
 function SignUp() {
+
+    let navigate = useNavigate();
+
+    const [messageApi, contextHolder] = message.useMessage();
+
 
     const layout = {
         labelCol: { span: 8 },
@@ -19,8 +28,18 @@ function SignUp() {
     };
     /* eslint-enable no-template-curly-in-string */
 
-    const onFinish = (values: any) => {
-        console.log(values);
+
+
+    const onFinish = async (values: any) => {
+        try {
+            await api().post("/users", values);
+            messageProvider(messageApi).success("efewf");
+            setTimeout(() => {
+                navigate("/login");
+            }, 1000);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
@@ -48,6 +67,8 @@ function SignUp() {
                     Submit
                 </Button>
             </Form.Item>
+            {contextHolder}
+
         </Form>
     );
 }
