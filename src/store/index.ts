@@ -3,16 +3,16 @@ import { userReducer } from "./reducers";
 import { UserState } from "../types";
 
 interface AppState {
-    user: UserState;
+    user: UserState;/* 
     categories: any;
-    records: any;
+    records: any; */
 }
 
 // it stores global states
 const rootReducer = combineReducers<AppState>({
     user: userReducer,
-    categories: () => { },
-    records: () => { }
+    /* categories: () => { },
+    records: () => { } */
 });
 
 export default rootReducer;
