@@ -7,7 +7,17 @@ const defaultState: UserState = {
 }
 
 const userReducer = (state: UserState = defaultState, action: UserAction) => {
-    return state;
+    switch (action.type) {
+        case "LOGIN_START":
+            return ({ ...state, loading: true, error: "" }) as UserState
+        case "LOGIN_SUCCESS":
+            return ({ ...state, loading: false, data: action.payload }) as UserState
+        case "LOGIN_ERROR":
+            return ({ ...state, loading: false, error: "" }) as UserState
+
+        default:
+            return state;
+    }
 }
 
 

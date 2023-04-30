@@ -31,7 +31,7 @@ function SignUp() {
         try {
             await api().post("/users", values);
             messageProvider().success("you've signed up");
-            navigate("/login");
+            navigate("/login", { state: { newSignUp: true } });
         } catch (error: any) {
             messageProvider().error(error.message);
         }

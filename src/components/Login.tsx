@@ -1,41 +1,55 @@
-import { Button, Checkbox, Col, Form, Input, Row } from 'antd';
-import React from "react";
-import { api, messageProvider } from '../utils';
-import { useNavigate } from 'react-router-dom';
+import { Button, Checkbox, Col, Form, Input, Row, Result } from 'antd';
+import React, { useEffect } from "react";
+import { useLocation, useNavigate } from 'react-router-dom';
+import { LoginForm } from '../types';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../store/actions/userActions';
+import { AppState } from '../store';
+import { messageProvider } from '../utils';
 
 function Login() {
 
     let navigate = useNavigate();
+    let location = useLocation();
+    const dispatch = useDispatch();
 
-    const onFinish = async (values: any) => {
-        try {
-            const req = {
-                username: "mor_2314",
-                password: "83r5^_"
-            };
 
-            const response = await api().post("/auth/login", req);
-            console.log(response);
-            messageProvider().success("you've logged in");
-            navigate("/home");
-        } catch (error: any) {
-            messageProvider().error(error.message);
-        }
+    const { data, loading, error } = useSelector((state: AppState) => state.user);
+
+    const onFinish = async (values: LoginForm) => {
+        values.username = 'mor_2314';
+        values.password = '83r5^_';
+        dispatch(login(values));
     };
 
-    const onFinishFailed = (errorInfo: any) => {
-        console.log('Failed:', errorInfo);
-    };
+    useEffect(()=>{
+        error && messageProvider().error(error);
+    },[error])
 
+    useEffect(()=>{
+        data.username && messageProvider().success("You've successfully logged in!");
+    },[data.username])
+   
     return (
         <React.Fragment>
+            <h2 style={{ textAlign: 'center' }}>Please Login</h2>
+
+            {location.state?.newSignUp &&
+                <Result
+                    status="success"
+                    title="You've signed up succeessfully"
+                    subTitle="Please login with your username and password"
+                />
+            }
+
+
             <Form
                 name="basic"
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 16 }}
                 initialValues={{ remember: true }}
                 onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
+                /*  onFinishFailed={onFinishFailed} */
                 autoComplete="off"
             >
                 <Row>
