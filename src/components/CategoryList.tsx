@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../store/actions/categoryActions";
 import { AppState } from "../store";
 import { Space, Table } from "antd";
-import { RightCircleFilled, RightOutlined } from "@ant-design/icons";
+import { EditOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
 const CategoryList = () => {
@@ -34,7 +34,7 @@ const CategoryList = () => {
             key: 'action',
             render: (_: any, record: any) => (
                 <Space size="middle">
-                    <RightCircleFilled onClick={() => {
+                    <EditOutlined onClick={() => {
                         navigate({
                             pathname: "/category-detail",
                             search: `?id=${record.id}&categoryName=${record.title}`,

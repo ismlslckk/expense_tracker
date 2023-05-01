@@ -8,10 +8,11 @@ const CategoryDetail = () => {
     const location = useLocation();
 
     // there is no endpoint to get category detail, that's why i passed category as state property
-    const category = location.state.category;
+    let category = location.state?.category;
+    category = category ? category : {};
 
     useEffect(() => {
-        console.log('id => ', searchParams.get('id'),", categoryName => ",searchParams.get('categoryName'));
+        console.log('id => ', searchParams.get('id'), ", categoryName => ", searchParams.get('categoryName'));
     }, []);
 
 
