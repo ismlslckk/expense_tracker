@@ -1,6 +1,6 @@
 import { Button, Checkbox, Col, Form, Input, Row, Result } from 'antd';
 import React, { useEffect } from "react";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { LoginForm } from '../types';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../store/actions/userActions';
@@ -9,9 +9,9 @@ import { messageProvider } from '../utils';
 
 function Login() {
 
-    let location = useLocation();
+    const location = useLocation();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
-
 
     const { data, loading, error } = useSelector((state: AppState) => state.user);
 
@@ -20,6 +20,12 @@ function Login() {
         values.password = '83r5^_';
         dispatch(login(values));
     };
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token)
+            navigate("/home");
+    }, [data]);
 
     useEffect(() => {
         error && messageProvider().error(error);
@@ -40,7 +46,6 @@ function Login() {
                     subTitle="Please login with your username and password"
                 />
             }
-
 
             <Form
                 name="basic"

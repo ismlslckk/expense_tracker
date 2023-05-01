@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { Login, SignUp } from "./components";
+import { Home, Login, ProtectedRoute, SignUp } from "./components";
 
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
 
@@ -37,17 +37,15 @@ function App() {
       </Header>
       <Content className="site-layout" style={{ padding: '50px' }}>
         <Routes>
-          <Route path="/register" element={<SignUp />}></Route>
-          <Route path="/login" element={<Login />}></Route>
+          <Route element={<ProtectedRoute />}>
+            <Route path="/home" element={<Home />} />
+          </Route>
+          <Route path="/register" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </Content>
       <Footer style={{ textAlign: 'center' }}>Expense Tracker @ismail selcuk</Footer>
     </Layout>
-
-    /* 
-    <Routes>
-    <Route path="/register" element={<SignUp/>}></Route>
-    </Routes> */
 
   );
 }
