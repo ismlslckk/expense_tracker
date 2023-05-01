@@ -1,16 +1,19 @@
 import { combineReducers } from "redux";
 import { userReducer } from "./reducers";
-import { UserState } from "../types";
+import { GetCategoriesState, UserState } from "../types";
+import categoryReducer from "./reducers/categoryReducer";
 
 export interface AppState {
-    user: UserState;/* 
-    categories: any;
+    user: UserState;
+    categories: GetCategoriesState;
+    /*
     records: any; */
 }
 
 // it stores global states
 const rootReducer = combineReducers<AppState>({
     user: userReducer,
+    categories: categoryReducer
     /* categories: () => { },
     records: () => { } */
 });

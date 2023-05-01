@@ -1,6 +1,5 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { Home, Login, ProtectedRoute, SignUp } from "./components";
+import { CategoryList, Home, Login, ProtectedRoute, SignUp } from "./components";
 
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
 
@@ -39,6 +38,7 @@ function App() {
         <Routes>
           <Route element={<ProtectedRoute />}>
             <Route path="/home" element={<Home />} />
+            <Route path="/categories" element={<CategoryList />} />
           </Route>
           <Route path="/register" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
