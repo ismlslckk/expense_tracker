@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { CategoryList, Home, Login, ProtectedRoute, SignUp } from "./components";
+import { CategoryDetail, CategoryList, Home, Login, ProtectedRoute, SignUp } from "./components";
 
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
 
@@ -39,6 +39,7 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route path="/home" element={<Home />} />
             <Route path="/categories" element={<CategoryList />} />
+            <Route path="/category-detail" element={<CategoryDetail />} />
           </Route>
           <Route path="/register" element={<SignUp />} />
           <Route path="/login" element={<Login />} />

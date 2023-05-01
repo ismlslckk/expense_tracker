@@ -3,10 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../store/actions/categoryActions";
 import { AppState } from "../store";
 import { Space, Table } from "antd";
+import { RightCircleFilled, RightOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 
 const CategoryList = () => {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const { data, loading, error } = useSelector((state: AppState) => state.categories);
 
@@ -31,7 +34,12 @@ const CategoryList = () => {
             key: 'action',
             render: (_: any, record: any) => (
                 <Space size="middle">
-                    <a>View Products</a>
+                    <RightCircleFilled onClick={() => {
+                        navigate({
+                            pathname: "/category-detail",
+                            search: `?id=${record.id}&categoryName=${record.title}`,
+                        }, { state: { category: record } });
+                    }} />
                 </Space>
             ),
         },
@@ -40,7 +48,8 @@ const CategoryList = () => {
     return (
 
         <>
-            <Table columns={columns} dataSource={data} />
+            <h2>Category List</h2>
+            <Table columns={columns} rowKey={(record) => record.id} dataSource={data} />
         </>
     );
 

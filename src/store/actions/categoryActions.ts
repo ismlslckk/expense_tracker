@@ -17,7 +17,6 @@ export const getCategories = () => async (dispatch: GetCategoriesDispatch) => {
                 description: 'test ' + categoryId,
             } as Category;
         });
-        console.log(data);
         dispatch({
             type: "CATEGORIS_GET_SUCCESS", payload: data
         });
