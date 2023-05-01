@@ -14,7 +14,6 @@ export const getCategories = () => async (dispatch: GetCategoriesDispatch) => {
             return {
                 id: categoryId,
                 title: categoryName,
-                price: Math.floor(Math.random() * 101),
                 description: 'test ' + categoryId,
             } as Category;
         });
